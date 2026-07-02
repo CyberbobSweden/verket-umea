@@ -5,6 +5,7 @@ const supabaseHost = process.env.NEXT_PUBLIC_SUPABASE_URL
 
 const nextConfig = {
   reactStrictMode: true,
+  serverExternalPackages: ['node-ical'],
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [

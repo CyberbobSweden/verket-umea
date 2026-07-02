@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import ical from 'node-ical';
+import type * as IcalTypes from 'node-ical';
 import { requireRole } from '@/lib/authorize';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { slugify } from '@/lib/utils';
@@ -36,17 +36,17 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Endast Google Calendar-länkar stöds.' }, { status: 400 });
   }
 
-  const events = await ical.async.fromURL(icalUrl);
+  const events = await (await import('node-ical')).default.async.fromURL(icalUrl);
   const admin = createAdminClient();
 
   // node-ical's ParameterValue fields (summary/description/location) can be
   // either a plain string or `{ val, params }` when the source .ics uses
   // ICS parameters like LANGUAGE — unwrap to a plain string either way.
-  const textOf = (v: ical.ParameterValue | undefined): string | undefined =>
+  const textOf = (v: IcalTypes.ParameterValue | undefined): string | undefined =>
     v == null ? undefined : typeof v === 'string' ? v : v.val;
 
   const rows = Object.values(events)
-    .filter((e): e is ical.VEvent => e != null && e.type === 'VEVENT')
+    .filter((e): e is IcalTypes.VEvent => e != null && e.type === 'VEVENT')
     .filter((e) => e.end != null)
     .map((e) => ({
       slug: `${slugify(textOf(e.summary) ?? 'event')}-${e.uid?.slice(0, 6) ?? Math.random().toString(36).slice(2, 8)}`,
