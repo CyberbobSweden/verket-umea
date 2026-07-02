@@ -12,7 +12,7 @@
     "format": "prettier --write .",
     "db:types": "supabase gen types typescript --project-id \"$SUPABASE_PROJECT_ID\" --schema public > src/types/database.types.ts",
     "db:push": "supabase db push",
-    "prepare": "husky"
+    "prepare": "husky || exit 0"
   },
   "dependencies": {
     "next": "15.5.18",
