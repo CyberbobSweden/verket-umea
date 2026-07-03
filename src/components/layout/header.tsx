@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Search, Bell } from 'lucide-react';
@@ -30,12 +31,17 @@ export function Header({ profile }: { profile: Profile }) {
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-void/80 backdrop-blur-md">
       <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 font-display text-xl font-bold tracking-widest">
-          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-gradient-to-br from-signal-500 to-volt text-void">
-            V
+        <Link href="/" className="flex items-center gap-2">
+          <span className="relative h-9 w-40">
+            <Image
+              src="/logotyper/verket-logo-wide-inverted.png"
+              alt="Verket Umeå"
+              fill
+              priority
+              className="object-contain object-left"
+              sizes="160px"
+            />
           </span>
-          <span className="text-gradient">VERKET</span>
-          <span className="text-mist">UMEÅ</span>
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex">

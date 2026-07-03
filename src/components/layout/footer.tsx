@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Instagram, Youtube, Facebook } from 'lucide-react';
 import { WaveformDivider } from '@/components/shared/waveform-divider';
 import { NewsletterForm } from '@/components/shared/newsletter-form';
@@ -22,7 +23,15 @@ export async function Footer() {
         <WaveformDivider className="mb-10 h-6 opacity-40" />
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <p className="font-display text-lg font-bold tracking-widest">VERKET UMEÅ</p>
+            <span className="relative block h-8 w-36">
+              <Image
+                src="/logotyper/verket-logo-wide-inverted.png"
+                alt="Verket Umeå"
+                fill
+                className="object-contain object-left"
+                sizes="144px"
+              />
+            </span>
             <p className="mt-3 max-w-xs text-sm text-mist">
               En ideell mötesplats för musik, gaming och alternativ kultur. Drivs av medlemmar, för medlemmar — sedan
               starten.
